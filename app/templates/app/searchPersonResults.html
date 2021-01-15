@@ -1,0 +1,19 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+    <main>
+        {% for poster,id, title in personDetails %}
+            <a href="../searchResults/{{ id }}">
+                {% if poster == None %}
+                    <div class="seasonThumbs" style="background: url('../static/app/images/noImage.jpg');background-size: 100% 100%;">
+                
+                {% else %}
+                    <div class="seasonThumbs" style="background: url('https://image.tmdb.org/t/p/original{{ poster }}');background-size: 100% 100%;">  
+                {% endif %}
+                        <p id="pSeasons" class="smallFont">{{ title|truncatechars:14 }}</p>
+                    </div>
+            </a>
+        {% endfor %}
+    </main>
+{% endblock %}

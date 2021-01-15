@@ -1,0 +1,64 @@
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - Django Project 2019</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
+    <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
+</head>
+{% block content %}
+    <main>
+        <ul class="nav nav-tabs nav-justified">
+            <li class="active"><a class="li-tabs" data-toggle="tab" href="#overview">Overview</a></li>
+            <li><a class="li-tabs" data-toggle="tab" href="#tabCredits">Guest Casts</a></li>
+            <li><a class="li-tabs" data-toggle="tab" href="#tabImages">Images</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="overview" class="tab-pane fade in active">
+                
+                    {% if currEp_Poster != None %}
+                        <img width="90%" src="https://image.tmdb.org/t/p/original{{ currEp_Poster }}" alt="{{ currEp_Name }}" />
+                    {% else %}
+                        <img height="200px" width="50%" src="../static/app/images/noImage.jpg" alt="{{ currEp_Name }}"/>    
+                    {% endif %}
+                    
+                    <p id="pTitle">{{ currEp_Name }}</p>
+                    <p class="pshowTitle"> {{ currEp_Overview }} </p> 
+                                  
+            </div>      
+            
+            <div id="tabCredits" class="tab-pane fade">
+                <div class="row">
+                    {% for guestStarName, guestStarPoster,guestID in showGuests  %}
+                        <a href="../searchResults/{{ guestID }}" target="_parent">
+                        <div class="col-xs-4">
+                            {% if guestStarPoster != None %}
+                                <img class="roundPics" src="https://image.tmdb.org/t/p/original{{ guestStarPoster }}" alt="{{ guestStarName }}"/>
+                            {% else %}
+                                <img class="roundPics" src="../static/app/images/noImage.jpg" alt="{{ guestStarName }}"/>
+                            {% endif %}                
+                            <p class="pshowNames">{{ guestStarName }}</p> 
+                        </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div id="tabImages" class="tab-pane fade">
+                {% for imagePath in episodeImages %}
+                    <a href="https://image.tmdb.org/t/p/original{{ imagePath }}" target="_blank">
+                        <div class="extraImages" style="background: url('https://image.tmdb.org/t/p/original{{ imagePath }}');background-size: 100% 100%;">
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>                
+        </div>
+    </main>
+
+    
+{% endblock %}
+<script src="../static/app/scripts/modernizr-2.6.2.js"></script>
+<script src="../static/app/scripts/jquery-1.10.2.min.js"></script>
+<script src="../static/app/scripts/bootstrap.min.js"></script>
