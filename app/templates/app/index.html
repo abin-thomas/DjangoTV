@@ -4,20 +4,20 @@
 
 <h2>Welcome to Django TV.</h2>
 <main>
-        {% for title,id,poster in popularShowDetails %}
-            <a href="../showdetails/{{ id }}" title="{{ title }}">
-                {% if poster == None %}
-                    <div class="seasonThumbs" style="background: url('../static/app/images/noImage.jpg');background-size: 100% 100%;">
-                
-                {% else %}
-                    <div class="seasonThumbs" style="background: url('https://image.tmdb.org/t/p/original{{ poster }}');background-size: 100% 100%;">  
-                {% endif %}
-                    </div>
-            </a>
-                
+    {% for title,id,poster in popularShowDetails %}
+        <a href="../showdetails/{{ id }}" title="{{ title }}">
+            {% if poster == None %}
+                <div class="seasonThumbs" style="background: url('../static/app/images/noImage.jpg');background-size: 100% 100%;">
             
-        {% endfor %}
-    </main>
+            {% else %}
+                <div class="seasonThumbs" style="background: url('https://image.tmdb.org/t/p/original{{ poster }}');background-size: 100% 100%;">  
+            {% endif %}
+                </div>
+        </a>
+            
+        
+    {% endfor %}
+</main>
 
 
 

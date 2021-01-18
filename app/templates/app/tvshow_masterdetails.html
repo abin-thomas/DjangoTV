@@ -1,93 +1,128 @@
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} - Django Project 2019</title>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
-    
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ title }} - Django Project 2019</title>
+  {% load static %}
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="{% static 'app/content/bootstrap.min.css' %}"
+  />
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="{% static 'app/content/site.css' %}"
+  />
 </head>
 
 {% block content %}
-    <main>
-        <ul class="nav nav-tabs nav-justified">
-            <li class="active"><a class="li-tabs" data-toggle="tab" href="#overview">Overview</a></li>
-            <li><a class="li-tabs" data-toggle="tab" href="#tabCredits">Creators & Casts</a></li>
-            <li><a class="li-tabs" data-toggle="tab" href="#tabImages">Images</a></li>
-        </ul>
+<main>
+  <ul class="nav nav-tabs nav-justified">
+    <li class="active">
+      <a class="li-tabs" data-toggle="tab" href="#overview">Overview</a>
+    </li>
+    <li>
+      <a class="li-tabs" data-toggle="tab" href="#tabCredits"
+        >Creators & Casts</a
+      >
+    </li>
+    <li><a class="li-tabs" data-toggle="tab" href="#tabImages">Images</a></li>
+  </ul>
 
-        <div class="tab-content">
-            <div id="overview" class="tab-pane fade in active">
-                <div class="row">
-                    <div class="col-xs-5">
-                        {% if tvShowPoster != None %}
-                                    <img id="imgPoster" src="https://image.tmdb.org/t/p/original{{ tvShowPoster }}">
-                                {% else %}
-                                    <img id="imgPoster" src="../static/app/images/noImage.jpg"/>
-                                {% endif %}
-                             
-                    </div>
-                    <div class="col-xs-4 col-md-8">
-                        <p class="pshowTitle">Rating : {{ tvShowRating }}
-                        <p class="pshowTitle">Total Seasons : {{ tvShowTotalSeasons }}
-                        <p class="pshowTitle">Total Episodes : {{ tvShowTotalEpisodes }}
-                    </div>
-                </div>      
-            
-                <div class="row">
-                    <div class="col-xs-12">
-                        <p class="pshowTitle">{{ tvShowOverview }}
-                    </div>
-                </div>
-            </div>
-
-            <div id="tabCredits" class="tab-pane fade">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <p class="pshowHeads"><u> Creators: </u></p>
-                    </div>
-                        {% for creator,creatorPic in showCreators %}
-                            <div class="col-xs-4">
-                                {% if creatorPic != None %}
-                                    <img class="roundPics" src="https://image.tmdb.org/t/p/original{{ creatorPic }}" alt="{{ creator }}"/>
-                                {% else %}
-                                    <img class="roundPics" src="../static/app/images/noImage.jpg" alt="{{ creator }}"/>
-                                {% endif %}                
-                                <p class="pshowNames">{{ creator }}</p> 
-                            </div>               
-                        {% endfor %}     
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <p class="pshowHeads"><u> Casts: </u></p>
-                    </div>
-                        {% for castName,castPic,castID in showCasts %}
-                            <a href="../searchResults/{{ castID }}" target="_parent"> 
-                            <div class="col-xs-4">
-                                {% if castPic != None %}
-                                    <img class="roundPics" src="https://image.tmdb.org/t/p/original{{ castPic }}" alt="{{ castName }}"/>
-                                {% else %}
-                                    <img class="roundPics" src="../static/app/images/noImage.jpg" alt="{{ castName }}"/>
-                                {% endif %}                
-                                <p class="pshowNames">{{ castName }}</p> 
-                            </div>
-                            </a>               
-                        {% endfor %}     
-                    </div>
-                </div>
-
-                <div id="tabImages" class="tab-pane fade">
-                    {% for imagePath in extraImages %}
-                        <a href="https://image.tmdb.org/t/p/original{{ imagePath }}" target="_blank">
-                            <div class="extraImages" style="background: url('https://image.tmdb.org/t/p/original{{ imagePath }}');background-size: 100% 100%;">
-                            </div>
-                        </a>
-                    {% endfor %}
-                </div>
+  <div class="tab-content">
+    <div id="overview" class="tab-pane fade in active">
+      <div class="row">
+        <div class="col-xs-5">
+          {% if tvShowPoster != None %}
+          <img
+            id="imgPoster"
+            src="https://image.tmdb.org/t/p/original{{ tvShowPoster }}"
+          />
+          {% else %}
+          <img id="imgPoster" src="../static/app/images/noImage.jpg" />
+          {% endif %}
         </div>
-    </main>
+        <div class="col-xs-4 col-md-8">
+          <p class="pshowTitle">Rating : {{ tvShowRating }}</p>
+          <p class="pshowTitle">Total Seasons : {{ tvShowTotalSeasons }}</p>
+          <p class="pshowTitle">Total Episodes : {{ tvShowTotalEpisodes }}</p>
+        </div>
+      </div>
 
-    
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="pshowTitle">{{ tvShowOverview }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="tabCredits" class="tab-pane fade">
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="pshowHeads"><u> Creators: </u></p>
+        </div>
+        {% for creator,creatorPic in showCreators %}
+        <div class="col-xs-4">
+          {% if creatorPic != None %}
+          <img
+            class="roundPics"
+            src="https://image.tmdb.org/t/p/original{{ creatorPic }}"
+            alt="{{ creator }}"
+          />
+          {% else %}
+          <img
+            class="roundPics"
+            src="../static/app/images/noImage.jpg"
+            alt="{{ creator }}"
+          />
+          {% endif %}
+          <p class="pshowNames">{{ creator }}</p>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="pshowHeads"><u> Casts: </u></p>
+        </div>
+        {% for castName,castPic,castID in showCasts %}
+        <a href="../searchResults/{{ castID }}" target="_parent">
+          <div class="col-xs-4">
+            {% if castPic != None %}
+            <img
+              class="roundPics"
+              src="https://image.tmdb.org/t/p/original{{ castPic }}"
+              alt="{{ castName }}"
+            />
+            {% else %}
+            <img
+              class="roundPics"
+              src="../static/app/images/noImage.jpg"
+              alt="{{ castName }}"
+            />
+            {% endif %}
+            <p class="pshowNames">{{ castName }}</p>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div id="tabImages" class="tab-pane fade">
+      {% for imagePath in extraImages %}
+      <a
+        href="https://image.tmdb.org/t/p/original{{ imagePath }}"
+        target="_blank"
+      >
+        <div
+          class="extraImages"
+          style="background: url('https://image.tmdb.org/t/p/original{{ imagePath }}');background-size: 100% 100%;"
+        ></div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</main>
+
 {% endblock %}
 <script src="../static/app/scripts/modernizr-2.6.2.js"></script>
 <script src="../static/app/scripts/jquery-1.10.2.min.js"></script>
